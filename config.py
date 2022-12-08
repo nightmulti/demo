@@ -1,17 +1,17 @@
 import pymysql as mysql
 from selenium.webdriver.common.by import By
 
-conn = mysql.connect(host='localhost', port=3306, db='bdqn', user='root', password='root')
+conn = mysql.connect(host='localhost', port=3306, db='delta', user='root', password='root')
 curs = conn.cursor()
 
 
 def onInsert(origin, source):
-    curs.execute("INSERT INTO bdqn (origin, source) VALUES ('" + origin + "', '" + source + "')")
+    curs.execute("INSERT INTO delta (origin, source) VALUES ('" + origin + "', '" + source + "')")
     conn.commit()
 
 
 def onSelect(origin):
-    curs.execute("SELECT source from bdqn WHERE origin='" + origin + "'")
+    curs.execute("SELECT source from delta WHERE origin='" + origin + "'")
     origin = str(curs.fetchone())
     return origin[2:][:origin[2:].find("'")]
 
